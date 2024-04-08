@@ -62,13 +62,9 @@ url = "https://etangdeberre.org/comprendre/etat-ecologique-de-letang-de-berre/do
 file_path = "etang_de_berre_data.txt"
 
 # Récupérer les données de la page
-while True:
-    station_data = scrape_station(url)
-    if station_data:
-        # Enregistrer les données dans le fichier texte
-        save_to_file(station_data, file_path)
-        print("Données enregistrées avec succès.")
-    else:
-        print("Impossible de récupérer les données.")
-    # Attendre une heure avant de récupérer les données à nouveau
-    time.sleep(3600)  # 3600 secondes = 1 heure
+if station_data:
+    # Enregistrer les données dans le fichier texte
+    save_to_file(station_data, file_path)
+    print("Données enregistrées avec succès.")
+else:
+    print("Impossible de récupérer les données.")
