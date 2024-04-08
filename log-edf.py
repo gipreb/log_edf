@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr  8 10:59:32 2024
-
-@author: Nicolas
-"""
-
 import requests
 from bs4 import BeautifulSoup
-import time
 
 # Fonction pour récupérer les données d'une station donnée
 def scrape_station(url):
@@ -47,7 +39,7 @@ def scrape_station(url):
 def save_to_file(data, file_path):
     with open(file_path, 'a') as f:
         # En-tête du fichier
-        f.write("stations;date_heure;température_air;température_eau;salinité_surface;salinité_milieu;salinité_fond\n")
+        f.write("stations;date_heure;temperature_air;temperature_eau;salinite_surface;salinite_milieu;salinite_fond\n")
         for entry in data:
             # Formatage de chaque ligne avec les données
             line = ';'.join([entry['sonde'], entry['date_heure'],
@@ -58,13 +50,16 @@ def save_to_file(data, file_path):
 # URL du site à scraper
 url = "https://etangdeberre.org/comprendre/etat-ecologique-de-letang-de-berre/donnees-en-direct/"
 
-# Chemin où enregistrer le fichier texte dans Google Drive
+# Chemin où enregistrer le fichier texte
 file_path = "etang_de_berre_data.txt"
 
-# Récupérer les données de la page
-if station_data:
-    # Enregistrer les données dans le fichier texte
-    save_to_file(station_data, file_path)
+# Appel de la fonction pour récupérer les données
+data = scrape_station(url)
+
+# Vérifier si les données ont été récupérées avec succès
+if data:
+    # Appel de la fonction pour enregistrer les données dans un fichier
+    save_to_file(data, file_path)
     print("Données enregistrées avec succès.")
 else:
-    print("Impossible de récupérer les données.")
+    print("Échec de la récupération des données.")
