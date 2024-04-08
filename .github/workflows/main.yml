@@ -1,0 +1,25 @@
+name: Run Python script
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Exécuter toutes les heures
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+      
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+      
+    - name: Run Python script
+      run: log-edf.py
+      env:
+        FILE_PATH: "file.txt"  # Chemin d'accès au fichier de sortie
