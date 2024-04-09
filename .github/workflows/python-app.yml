@@ -37,7 +37,7 @@ jobs:
     - name: Test with pytest
       run: |
         python log-edf.py
-    permissions:
+      permissions:
         contents: write
     - name: Commit et push les modifications
       run: |
