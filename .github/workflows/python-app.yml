@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -37,8 +37,6 @@ jobs:
     - name: Test with pytest
       run: |
         python log-edf.py
-      permissions:
-        contents: write
     - name: Commit et push les modifications
       run: |
         git config --global user.name 'GitHub Actions'
