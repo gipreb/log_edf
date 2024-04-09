@@ -22,5 +22,5 @@ jobs:
 
     - name: Run Python script
       run: |
-        python script.py  # Nom de votre script Python
+        python log-edf.py  # Nom de votre script Python
         echo "Script executed successfully."
