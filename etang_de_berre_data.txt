@@ -1,3 +1,5 @@
 stations;date_heure;temperature_air;temperature_eau;salinite_surface;salinite_milieu;salinite_fond
 Sonde SA1;09/04/2024  06h00;14.1°C;16,3°C;18,3;19,1;19,5
 Sonde SA3;09/04/2024  06h00;14.1°C;16,2°C;19,1;21,6;0
+Sonde SA1;09/04/2024  07h00;12.7°C;16,2°C;18,3;18,7;19,7
+Sonde SA3;09/04/2024  07h00;12.7°C;15,9°C;19;20,9;0
