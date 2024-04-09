@@ -39,7 +39,7 @@ def scrape_station(url):
 def save_to_file(data, file_path):
     with open(file_path, 'a') as f:
         # En-tête du fichier
-        f.write("stations;date_heure;temperature_air;temperature_eau;salinite_surface;salinite_milieu;salinite_fond\n")
+        #f.write("stations;date_heure;temperature_air;temperature_eau;salinite_surface;salinite_milieu;salinite_fond\n")
         for entry in data:
             # Formatage de chaque ligne avec les données
             line = ';'.join([entry['sonde'], entry['date_heure'],
