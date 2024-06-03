@@ -2435,3 +2435,5 @@ Sonde SA1;-;°C;0°C;0;0;0
 Sonde SA3;-;°C;0°C;0;0;0
 Sonde SA1;-;°C;0°C;0;0;0
 Sonde SA3;-;°C;0°C;0;0;0
+Sonde SA1;-;°C;0°C;0;0;0
+Sonde SA3;-;°C;0°C;0;0;0
