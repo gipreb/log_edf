@@ -2,37 +2,38 @@ name: Collecte Salinité Étang de Berre
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Toutes les 30 minutes
-  workflow_dispatch:      # Permet de lancer manuellement pour tester
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Force Node 24 pour supprimer les warnings
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # CRITIQUE : Donne au bot le droit d'écrire dans le dépôt
     permissions:
       contents: write
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Version 4 utilise Node 24
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v5 # Version 5 utilise Node 24
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install requests beautifulsoup4 pandas
+        run: pip install requests beautifulsoup4 pandas
 
       - name: Run script
         run: python salinite_bot.py
+        # L'erreur code 2 vient d'ici. On va sécuriser le script Python.
 
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add donnees_etang_berre.csv
-          # Le "|| exit 0" évite l'erreur si aucune donnée n'a changé
-          git commit -m "Mise à jour données salinité $(date)" || exit 0
+          git commit -m "MAJ données $(date)" || exit 0
           git push
