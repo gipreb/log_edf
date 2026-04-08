@@ -3,30 +3,36 @@ name: Collecte Salinité Étang de Berre
 on:
   schedule:
     - cron: '*/30 * * * *'  # Toutes les 30 minutes
-  workflow_dispatch:      # Permet de lancer manuellement
+  workflow_dispatch:      # Permet de lancer manuellement pour tester
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # CRITIQUE : Donne au bot le droit d'écrire dans le dépôt
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Version 4 utilise Node 24
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Version 5 utilise Node 24
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 pandas
+        run: |
+          pip install requests beautifulsoup4 pandas
 
       - name: Run script
-        run: python log-edf.py
+        run: python salinite_bot.py
 
       - name: Commit and push changes
         run: |
-          git config --global user.name 'Bot Salinité'
-          git config --global user.email 'bot@github.com'
-          git add donnees_salinite.csv
-          git commit -m "Mise à jour données salinité" || exit 0
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add donnees_etang_berre.csv
+          # Le "|| exit 0" évite l'erreur si aucune donnée n'a changé
+          git commit -m "Mise à jour données salinité $(date)" || exit 0
           git push
